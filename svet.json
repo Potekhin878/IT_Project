@@ -1,0 +1,74 @@
+{
+  "mistnosti": [
+    {
+      "nazev": "vchod",
+      "popis": "Stojis pred starym domem.",
+      "vychody": {
+        "vychod": "vstupni_hala"
+      }
+    },
+    {
+      "nazev": "vstupni_hala",
+      "popis": "Vstupni hala domu.",
+      "vychody": {
+        "zapad": "vchod",
+        "vychod": "obyvaci_pokoj",
+        "sever": "pracovna",
+        "jih": "sklep"
+      }
+    },
+    {
+      "nazev": "obyvaci_pokoj",
+      "popis": "Obyvaci pokoj s krbem.",
+      "vychody": {
+        "zapad": "vstupni_hala",
+        "vychod": "kuchyne"
+      }
+    },
+    {
+      "nazev": "kuchyne",
+      "popis": "Stara kuchyne.",
+      "vychody": {
+        "zapad": "obyvaci_pokoj"
+      }
+    },
+    {
+      "nazev": "pracovna",
+      "popis": "Zaprasena pracovna.",
+      "vychody": {
+        "jih": "vstupni_hala",
+        "zapad": "zahrada",
+        "vychod": "knihovna",
+        "sever": "loznice"
+      }
+    },
+    {
+      "nazev": "zahrada",
+      "popis": "Zarostla zahrada.",
+      "vychody": {
+        "vychod": "pracovna"
+      }
+    },
+    {
+      "nazev": "knihovna",
+      "popis": "Stara knihovna plna knih.",
+      "vychody": {
+        "zapad": "pracovna"
+      }
+    },
+    {
+      "nazev": "loznice",
+      "popis": "Opustena loznice.",
+      "vychody": {
+        "jih": "pracovna"
+      }
+    },
+    {
+      "nazev": "sklep",
+      "popis": "Temny sklep.",
+      "vychody": {
+        "sever": "vstupni_hala"
+      }
+    }
+  ]
+}

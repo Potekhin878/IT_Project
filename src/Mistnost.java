@@ -1,27 +1,50 @@
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Mistnost {
 
+    private String nazev;
+    private String popis;
+    private Map<String, Mistnost> vychody = new HashMap<>();
+    private List<Predmet> predmety = new ArrayList<>();
+    private List<Postava> postavy = new ArrayList<>();
+
+    public Mistnost(String nazev, String popis) {
+        this.nazev = nazev;
+        this.popis = popis;
+    }
+
     public String getNazev() {
-        return null;
+        return nazev;
     }
 
     public String getPopis() {
-        return null;
+        return popis;
     }
 
     public Map<String, Mistnost> getVychody() {
-        return null;
+        return vychody;
     }
 
     public List<Predmet> getPredmety() {
-        return null;
+        return predmety;
     }
 
     public List<Postava> getPostavy() {
-        return null;
+        return postavy;
     }
 
-}
+    public void pridatVychod(String smer, Mistnost cil) {
+        vychody.put(smer, cil);
+    }
 
+    public void pridatPredmet(Predmet predmet) {
+        predmety.add(predmet);
+    }
+
+    public void pridatPostavu(Postava postava) {
+        postavy.add(postava);
+    }
+}
