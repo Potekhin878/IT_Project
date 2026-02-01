@@ -1,8 +1,8 @@
-public class PrikazSeber implements Prikaz {
+public class PrikazPoloz implements Prikaz {
 
     @Override
     public String getNazev() {
-        return "seber";
+        return "poloz";
     }
 
     @Override
@@ -12,6 +12,6 @@ public class PrikazSeber implements Prikaz {
             return "Musíš zadat název předmětu.";
         }
 
-        return hrac.seberPredmet(parametry[0]);
+        return hrac.polozPredmet(parametry[0]);
     }
 }

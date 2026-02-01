@@ -1,12 +1,20 @@
 public class Postava {
 
+    private final String jmeno;
+    private final String rec;
+
+    public Postava(String jmeno, String rec) {
+        this.jmeno = jmeno;
+        this.rec = rec;
+    }
+
     public String getJmeno() {
-        return null;
+        return jmeno;
     }
 
-    public void mluv(Hrac hrac) {
-
+    public String mluv() {
+        return rec;
     }
-
 }
+
 

@@ -1,5 +1,6 @@
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Scanner;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -8,27 +9,41 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        // Читаем JSON файл со světem
-        String jsonText = Files.readString(Path.of("IT_Project/svet.json"));
-
-        // Преобразуем текст в JsonObject (Gson)
+        // Načtení JSON
+        String jsonText = Files.readString(Path.of("svet.json"));
         JsonObject data = JsonParser.parseString(jsonText).getAsJsonObject();
 
-        // Vytvoření světa a jeho načtení z JSON
+        // Vytvoření světa
         Svet svet = new Svet();
         svet.nacistZeJson(data);
 
-        // Начальная místnost
-        Mistnost mistnost = svet.getMistnost("vstupni_hala");
-        System.out.println("Jsi v: " + mistnost.getNazev());
-        System.out.println(mistnost.getPopis());
+        // Hráč začíná ve vstupní hale
+        Mistnost start = svet.getMistnost("vstupni_hala");
+        Hrac hrac = new Hrac(start);
 
-        // Pokus o pohyb na sever
-        mistnost = svet.pohniSe(mistnost, "sever");
-        System.out.println("Jdeš na sever → " + mistnost.getNazev());
+        // Správce příkazů
+        SpravcePrikazu spravce = new SpravcePrikazu();
 
-        // Pokus o pohyb na východ
-        mistnost = svet.pohniSe(mistnost, "vychod");
-        System.out.println("Jdeš na východ → " + mistnost.getNazev());
+        spravce.registruj(new PrikazJdi(svet));
+        spravce.registruj(new PrikazSeber());
+        spravce.registruj(new PrikazPoloz());
+        spravce.registruj(new PrikazInventar());
+        spravce.registruj(new PrikazMluv());
+        spravce.registruj(new PrikazPouzij());
+        spravce.registruj(new PrikazKonec());
+        spravce.registruj(new PrikazNapoveda(spravce));
+
+        // 🔥 Herní smyčka
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Vítej ve hře!");
+        System.out.println(start.getPopis());
+
+        while (true) {
+            System.out.print("> ");
+            String vstup = sc.nextLine();
+            String vysledek = spravce.provedPrikaz(hrac, vstup);
+            System.out.println(vysledek);
+        }
     }
 }

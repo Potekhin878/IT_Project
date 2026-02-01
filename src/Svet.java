@@ -47,13 +47,10 @@ public class Svet {
     }
 
     public Mistnost pohniSe(Mistnost aktualni, String smer) {
-
         Map<String, Mistnost> vychody = aktualni.getVychody();
-
         if (vychody.containsKey(smer)) {
             return vychody.get(smer);
         }
-
         return aktualni;
     }
 }

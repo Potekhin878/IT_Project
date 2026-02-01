@@ -1,5 +1,4 @@
 public interface Prikaz {
-
-    void vykonej(Hrac hrac, String[] parametry);
-
+    String getNazev();
+    String proved(Hrac hrac, String[] parametry);
 }
