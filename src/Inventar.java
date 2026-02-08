@@ -4,7 +4,7 @@ import java.util.List;
 public class Inventar {
 
     private final List<Predmet> predmety = new ArrayList<>();
-    private final int kapacita = 10;
+    private final int kapacita = 3; // podle Game designu
 
     public boolean pridejPredmet(Predmet predmet) {
         if (jePlny()) {
@@ -24,5 +24,16 @@ public class Inventar {
 
     public List<Predmet> getPredmety() {
         return predmety;
+    }
+
+    public boolean obsahuje(String nazev) {
+        return predmety.stream().anyMatch(p -> p.getNazev().equalsIgnoreCase(nazev));
+    }
+
+    public Predmet najdi(String nazev) {
+        return predmety.stream()
+                .filter(p -> p.getNazev().equalsIgnoreCase(nazev))
+                .findFirst()
+                .orElse(null);
     }
 }

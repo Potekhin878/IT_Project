@@ -14,16 +14,17 @@ public class PrikazPouzij implements Prikaz {
 
         String nazev = parametry[0];
 
-
-        for (Predmet p : hrac.getInventar().getPredmety()) {
-            if (p.getNazev().equalsIgnoreCase(nazev)) {
-
-
-
-                return "Použil jsi předmět: " + p.getNazev();
-            }
+        Predmet p = hrac.getInventar().najdi(nazev);
+        if (p == null) {
+            return "Tento předmět nemáš.";
         }
 
-        return "Tento předmět nemáš.";
+        Mistnost mistnost = hrac.getAktualniMistnost();
+
+        if (nazev.equalsIgnoreCase("hlavni_klic") && mistnost.getNazev().equals("vchod")) {
+            return "Odemkl jsi dveře hlavním klíčem a utekl z domu. Vyhrál jsi!";
+        }
+
+        return "Použil jsi předmět: " + p.getNazev() + ", ale nic zvláštního se nestalo.";
     }
 }
