@@ -1,6 +1,8 @@
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -9,7 +11,15 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        String jsonText = Files.readString(Path.of("svet.json"));
+        InputStream is = Main.class.getResourceAsStream("/svet.json");
+
+        String jsonText;
+        if (is != null) {
+            jsonText = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+        } else {
+            jsonText = Files.readString(Path.of("svet.json"));
+        }
+
         JsonObject data = JsonParser.parseString(jsonText).getAsJsonObject();
 
         Svet svet = new Svet();
