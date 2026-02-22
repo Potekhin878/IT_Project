@@ -39,7 +39,7 @@ Dostupné příkazy:
 4. Spusťte hru příkazem:
 
    ```bash
-   java -jar tajemstvi_domu.jar
+   java -jar IT_Project.jar
 
 5. Po spuštění se zobrazí úvodní text a popis první místnosti.
 
