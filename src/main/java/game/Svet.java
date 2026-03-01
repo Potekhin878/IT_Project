@@ -1,14 +1,24 @@
+package game;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import model.Predmet;
+import model.Postava;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Herní svět obsahující všechny místnosti.
+ * Umožňuje načtení mapy ze souboru JSON
+ * a pohyb hráče mezi místnostmi.
+ */
 public class Svet {
 
-    private Map<String, Mistnost> mistnosti = new HashMap<>();
+    private final Map<String, Mistnost> mistnosti = new HashMap<>();
 
+    /** Načte svět z JSON souboru. */
     public void nacistZeJson(JsonObject data) {
         JsonArray poleMistnosti = data.getAsJsonArray("mistnosti");
 
@@ -36,53 +46,58 @@ public class Svet {
         inicializujObsah();
     }
 
+    /** Inicializuje předměty a postavy ve světě. */
     private void inicializujObsah() {
-        // předměty
         mistnosti.get("obyvaci_pokoj")
-                .pridatPredmet(new Predmet("baterka", "Stará baterka, ale ještě funguje.", true));
+                .pridatPredmet(new Predmet("baterka", "Stará baterka.", true));
 
         mistnosti.get("kuchyne")
-                .pridatPredmet(new Predmet("rukavice", "Pracovní rukavice, hodí se na zahradu.", true));
+                .pridatPredmet(new Predmet("rukavice", "Pracovní rukavice.", true));
 
-        // nepřenosné – jen pro atmosféru / případné rozšíření
         mistnosti.get("knihovna")
-                .pridatPredmet(new Predmet("skrin", "Velká stará skříň, vypadá těžce.", false));
+                .pridatPredmet(new Predmet("skrin", "Velká skříň.", false));
 
         mistnosti.get("obyvaci_pokoj")
-                .pridatPredmet(new Predmet("stul", "Stůl s papírkem.", false));
+                .pridatPredmet(new Predmet("stul", "Stůl.", false));
 
         mistnosti.get("vchod")
-                .pridatPredmet(new Predmet("dvere", "Vchodové dveře, zamčené.", false));
+                .pridatPredmet(new Predmet("dvere", "Zamčené dveře.", false));
 
-        // postavy
         mistnosti.get("knihovna")
                 .pridatPostavu(new Postava("spravce",
-                        "Starý správce ti šeptá: 'Klíč hledej tam, kde je největší tma a kde roste zeleň.'"));
+                        "Klíč hledej tam, kde je tma a roste zeleň."));
 
         mistnosti.get("sklep")
                 .pridatPostavu(new Postava("najemnik",
-                        "Ztracený nájemník říká: 'Jestli mi dáš baterku, poradím ti víc.'"));
+                        "Dej mi baterku a poradím ti víc."));
 
         mistnosti.get("zahrada")
                 .pridatPostavu(new Postava("zahradnik",
-                        "Zahradník říká: 'Bez rukavic nebudu pracovat. Přines mi je.'"));
+                        "Bez rukavic nebudu pracovat."));
     }
 
+    /** Vrátí místnost podle názvu. */
     public Mistnost getMistnost(String nazev) {
         return mistnosti.get(nazev);
     }
 
+    /**
+     * Pokusí se přesunout hráče do směru.
+     * Obsahuje speciální logiku (např. zákaz vstupu do sklepa bez baterky).
+     */
     public Mistnost pohniSe(Hrac hrac, String smer) {
         Mistnost aktualni = hrac.getAktualniMistnost();
         Map<String, Mistnost> vychody = aktualni.getVychody();
+
         if (!vychody.containsKey(smer)) {
             return aktualni;
         }
+
         Mistnost cil = vychody.get(smer);
 
-        // speciální logika místností
-        if (cil.getNazev().equals("sklep") && !hrac.getInventar().obsahuje("baterka")) {
-            System.out.println("Je tam přílišná tma. Bez baterky tam nemůžeš.");
+        if (cil.getNazev().equals("sklep")
+                && !hrac.getInventar().obsahuje("baterka")) {
+            System.out.println("Je tam tma. Bez baterky tam nemůžeš.");
             return aktualni;
         }
 

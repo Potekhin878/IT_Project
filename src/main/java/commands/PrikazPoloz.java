@@ -1,3 +1,10 @@
+package commands;
+
+import game.Hrac;
+
+/**
+ * Příkaz "poloz" umožňuje hráči položit předmět z inventáře.
+ */
 public class PrikazPoloz implements Prikaz {
 
     @Override

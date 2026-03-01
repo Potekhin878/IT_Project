@@ -1,3 +1,10 @@
+package commands;
+
+import game.Hrac;
+
+/**
+ * Příkaz "seber" umožňuje hráči sebrat předmět z místnosti.
+ */
 public class PrikazSeber implements Prikaz {
 
     @Override

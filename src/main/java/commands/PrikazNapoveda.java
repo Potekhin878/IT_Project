@@ -1,3 +1,10 @@
+package commands;
+
+import game.Hrac;
+
+/**
+ * Příkaz "napoveda" vypíše seznam dostupných příkazů.
+ */
 public class PrikazNapoveda implements Prikaz {
 
     private final SpravcePrikazu spravce;

@@ -1,3 +1,13 @@
+package commands;
+
+import game.Hrac;
+import game.Mistnost;
+import model.Predmet;
+
+/**
+ * Příkaz "pouzij" umožňuje hráči použít předmět.
+ * Obsahuje speciální logiku pro hlavní klíč.
+ */
 public class PrikazPouzij implements Prikaz {
 
     @Override

@@ -1,3 +1,13 @@
+package commands;
+
+import game.Hrac;
+import model.Postava;
+import model.Predmet;
+
+/**
+ * Příkaz "mluv" umožňuje hráči mluvit s postavou v místnosti.
+ * Obsahuje speciální logiku pro nájemníka a zahradníka.
+ */
 public class PrikazMluv implements Prikaz {
 
     @Override
@@ -17,7 +27,7 @@ public class PrikazMluv implements Prikaz {
         for (Postava p : hrac.getAktualniMistnost().getPostavy()) {
             if (p.getJmeno().equalsIgnoreCase(jmeno)) {
 
-                // speciální logika
+                // nájemník
                 if (p.getJmeno().equalsIgnoreCase("najemnik")) {
                     if (hrac.getInventar().obsahuje("baterka")) {
                         return "Nájemník říká: 'Díky za baterku. Klíč ti pomůže najít zahradník na zahradě.'";
@@ -26,9 +36,10 @@ public class PrikazMluv implements Prikaz {
                     }
                 }
 
+                // zahradník
                 if (p.getJmeno().equalsIgnoreCase("zahradnik")) {
                     if (hrac.getInventar().obsahuje("rukavice")) {
-                        // dá hlavní klíč
+
                         if (!hrac.getInventar().obsahuje("hlavni_klic")) {
                             hrac.getInventar().pridejPredmet(
                                     new Predmet("hlavni_klic", "Hlavní klíč od domu.", true));

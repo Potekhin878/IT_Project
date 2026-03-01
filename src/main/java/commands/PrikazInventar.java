@@ -1,3 +1,11 @@
+package commands;
+
+import game.Hrac;
+import model.Predmet;
+
+/**
+ * Příkaz "inventar" vypíše obsah inventáře hráče.
+ */
 public class PrikazInventar implements Prikaz {
 
     @Override

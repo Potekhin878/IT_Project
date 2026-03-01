@@ -1,3 +1,14 @@
+package commands;
+
+import game.Hrac;
+import game.Mistnost;
+import game.Svet;
+import model.Predmet;
+import model.Postava;
+
+/**
+ * Příkaz "jdi" umožňuje hráči přesunout se do jiné místnosti.
+ */
 public class PrikazJdi implements Prikaz {
 
     private final Svet svet;

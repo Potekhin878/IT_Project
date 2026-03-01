@@ -1,3 +1,10 @@
+package commands;
+
+import game.Hrac;
+
+/**
+ * Příkaz "konec" ukončí hru.
+ */
 public class PrikazKonec implements Prikaz {
 
     @Override
